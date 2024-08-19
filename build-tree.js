@@ -1,3 +1,4 @@
+
 import Node from "./node.js";
 
 function buildTree(array)
@@ -18,5 +19,4 @@ function buildTree(array)
     node.right = buildTree(array.slice(mid + 1));
     return node;
 }
-
 
