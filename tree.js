@@ -1,4 +1,4 @@
-import { buildTree, insert } from "./tree-helper.js";
+import { buildTree, insert, deleteItem } from "./tree-helper.js";
 
 class Tree {
   #root;
@@ -37,6 +37,8 @@ const tree = new Tree([50, 30, 20, 40, 32, 34, 36, 70, 60, 65, 80, 75, 85]);
 
 prettyPrint(tree.root);
 
-tree.root = insert(insert(tree.root, 5));
+tree.root = insert(tree.root, 5);
+
+tree.root = deleteItem(tree.root, 50);
 
 prettyPrint(tree.root);
