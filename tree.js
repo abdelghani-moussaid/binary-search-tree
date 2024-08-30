@@ -68,6 +68,17 @@ class Tree {
     if (node == null) return 0;
     return 1 + Math.max(this.height(node.left), this.height(node.right));
   }
+  depth(node, root = this.#root) {
+    if (root == null) {
+      return null;
+    } else if (root == node) {
+      return 1;
+    } else if (root.data > node.data) {
+      return 1 + this.depth(node, root.left);
+    } else if (root.data < node.data) {
+      return 1 + this.depth(node, root.right);
+    }
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -93,40 +104,41 @@ tree.root = deleteItem(tree.root, 50);
 
 prettyPrint(tree.root);
 
-console.log(find(tree.root, 202));
+console.log(find(tree.root, 36));
 
-tree.levelOrder((current) => {
-  if (current.data > 33) {
-    console.log(current.data + " is big");
-  } else {
-    console.log(current.data + " is small");
-  }
-});
-tree.preOrder((current) => {
-  if (current.data > 33) {
-    console.log(current.data + " is big");
-  } else {
-    console.log(current.data + " is small");
-  }
-});
+// tree.levelOrder((current) => {
+//   if (current.data > 33) {
+//     console.log(current.data + " is big");
+//   } else {
+//     console.log(current.data + " is small");
+//   }
+// });
+// tree.preOrder((current) => {
+//   if (current.data > 33) {
+//     console.log(current.data + " is big");
+//   } else {
+//     console.log(current.data + " is small");
+//   }
+// });
 
-tree.inOrder((current) => {
-  if (current.data > 33) {
-    console.log(current.data + " is big");
-  } else {
-    console.log(current.data + " is small");
-  }
-});
+// tree.inOrder((current) => {
+//   if (current.data > 33) {
+//     console.log(current.data + " is big");
+//   } else {
+//     console.log(current.data + " is small");
+//   }
+// });
 
-tree.postOrder((current) => {
-  if (current.data > 33) {
-    console.log(current.data + " is big");
-  } else {
-    console.log(current.data + " is small");
-  }
-});
+// tree.postOrder((current) => {
+//   if (current.data > 33) {
+//     console.log(current.data + " is big");
+//   } else {
+//     console.log(current.data + " is small");
+//   }
+// });
 
-tree.levelOrder((index = 0) => {
-  index++;
-});
-console.log(tree.height(find(tree.root, 5)));
+// tree.levelOrder((index = 0) => {
+//   index++;
+// });
+// console.log(tree.height(find(tree.root, 5)));
+console.log(tree.depth(find(tree.root, 32)));
