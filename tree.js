@@ -1,4 +1,4 @@
-import { buildTree, insert, deleteItem } from "./tree-helper.js";
+import { buildTree, insert, deleteItem, find } from "./tree-helper.js";
 
 class Tree {
   #root;
@@ -42,3 +42,5 @@ tree.root = insert(tree.root, 5);
 tree.root = deleteItem(tree.root, 50);
 
 prettyPrint(tree.root);
+
+console.log(find(tree.root, 202));

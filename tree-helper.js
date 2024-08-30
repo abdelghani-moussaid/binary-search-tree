@@ -73,3 +73,15 @@ export function deleteItem(root, x) {
   }
   return root;
 }
+
+export function find(root, value) {
+  if (root == null) {
+    return null;
+  } else if (root.data === value) {
+    return root;
+  } else if (root.data > value) {
+    return find(root.left, value);
+  } else if (root.data < value) {
+    return find(root.right, value);
+  }
+}
