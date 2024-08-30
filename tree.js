@@ -68,8 +68,18 @@ class Tree {
     if (node == null) return 0;
     return 1 + Math.max(this.height(node.left), this.height(node.right));
   }
+  isBalanced(node = this.#root) {
+    if (node == null) return true;
+    const leftHeight = this.height(node.left);
+    const rightHeight = this.height(node.right);
+    if (leftHeight - rightHeight > 1 || leftHeight - rightHeight < -1) {
+      return false;
+    } else {
+      return this.isBalanced(node.left) && this.isBalanced(node.right);
+    }
+  }
   depth(node, root = this.#root) {
-    if (root == null) {
+    if (node == null || root == null) {
       return null;
     } else if (root == node) {
       return 1;
@@ -94,13 +104,21 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
   }
 };
 
-const tree = new Tree([50, 30, 20, 40, 32, 34, 36, 70, 60, 65, 80, 75, 85]);
+const tree = new Tree([1, 2, 3, 4, 5, 6, 7]);
 
 prettyPrint(tree.root);
 
-tree.root = insert(tree.root, 5);
-
-tree.root = deleteItem(tree.root, 50);
+// tree.root = insert(tree.root, 155);
+// tree.root = insert(tree.root, 151);
+// tree.root = insert(tree.root, 152);
+// tree.root = insert(tree.root, 153);
+// tree.root = insert(tree.root, 154);
+// tree.root = insert(tree.root, 156);
+// tree.root = insert(tree.root, 157);
+// tree.root = insert(tree.root, 158);
+// tree.root = insert(tree.root, 159);
+// tree.root = insert(tree.root, 160);
+// tree.root = deleteItem(tree.root, 50);
 
 prettyPrint(tree.root);
 
@@ -142,3 +160,4 @@ console.log(find(tree.root, 36));
 // });
 // console.log(tree.height(find(tree.root, 5)));
 console.log(tree.depth(find(tree.root, 32)));
+console.log(tree.isBalanced());
