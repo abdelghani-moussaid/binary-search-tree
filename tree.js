@@ -34,6 +34,16 @@ class Tree {
       throw new Error("No callback function is provided!");
     }
   }
+  preOrder(callback, root = this.#root) {
+    if (callback && typeof callback == "function") {
+      if (root == null) return;
+      callback(root);
+      this.preOrder(callback, root.left);
+      this.preOrder(callback, root.right);
+    } else {
+      throw new Error("No callback function is provided!");
+    }
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -62,6 +72,13 @@ prettyPrint(tree.root);
 console.log(find(tree.root, 202));
 
 tree.levelOrder((current) => {
+  if (current.data > 33) {
+    console.log(current.data + " is big");
+  } else {
+    console.log(current.data + " is small");
+  }
+});
+tree.preOrder((current) => {
   if (current.data > 33) {
     console.log(current.data + " is big");
   } else {
