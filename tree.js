@@ -64,6 +64,10 @@ class Tree {
       throw new Error("No callback function is provided!");
     }
   }
+  height(node) {
+    if (node == null) return 0;
+    return 1 + Math.max(this.height(node.left), this.height(node.right));
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -121,3 +125,8 @@ tree.postOrder((current) => {
     console.log(current.data + " is small");
   }
 });
+
+tree.levelOrder((index = 0) => {
+  index++;
+});
+console.log(tree.height(find(tree.root, 5)));
