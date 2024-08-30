@@ -18,6 +18,22 @@ class Tree {
   set root(newRoot) {
     this.#root = newRoot;
   }
+  levelOrder(callback) {
+    if (callback && typeof callback == "function") {
+      if (this.#root == null) return;
+      let queue = [];
+      queue.push(this.#root);
+      while (queue.length > 0) {
+        const current = queue[0];
+        callback(current);
+        if (current.left !== null) queue.push(current.left);
+        if (current.right !== null) queue.push(current.right);
+        queue.shift();
+      }
+    } else {
+      throw new Error("No callback function is provided!");
+    }
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -44,3 +60,11 @@ tree.root = deleteItem(tree.root, 50);
 prettyPrint(tree.root);
 
 console.log(find(tree.root, 202));
+
+tree.levelOrder((current) => {
+  if (current.data > 33) {
+    console.log(current.data + " is big");
+  } else {
+    console.log(current.data + " is small");
+  }
+});
