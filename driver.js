@@ -48,6 +48,9 @@ tree.postOrder((current) => {
   console.log(current.data);
 });
 
+tree.deleteItem(102);
+tree.prettyPrint();
+
 function randomArray(size, max) {
   let array = [];
   for (let i = 0; i < size; i++) {
