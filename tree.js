@@ -158,7 +158,7 @@ export default class Tree {
   reBalance() {
     if (!this.isBalanced()) {
       let newArray = [];
-      tree.inOrder((current) => {
+      this.inOrder((current) => {
         newArray.push(current.data);
       });
       this.root = BuildTree(newArray, 0, newArray.length - 1);
