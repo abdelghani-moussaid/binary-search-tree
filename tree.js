@@ -1,7 +1,7 @@
 import BuildTree from "./build-tree.js";
 import Node from "./node.js";
 
-class Tree {
+export default class Tree {
   #root;
   constructor(array) {
     // Sort then remove duplicates
@@ -165,75 +165,20 @@ class Tree {
       return this.root;
     }
   }
+  prettyPrint(node = this.root, prefix = "", isLeft = true) {
+    if (node === null) {
+      return;
+    }
+    if (node.right !== null) {
+      this.prettyPrint(
+        node.right,
+        `${prefix}${isLeft ? "│   " : "    "}`,
+        false
+      );
+    }
+    console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
+    if (node.left !== null) {
+      this.prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+    }
+  }
 }
-
-const prettyPrint = (node, prefix = "", isLeft = true) => {
-  if (node === null) {
-    return;
-  }
-  if (node.right !== null) {
-    prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
-  }
-  console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
-  if (node.left !== null) {
-    prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
-  }
-};
-
-const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-
-prettyPrint(tree.root);
-// console.log(tree.root);
-
-tree.root = tree.insert(7151);
-tree.root = tree.insert(7152);
-tree.root = tree.insert(7133);
-tree.root = tree.insert(7154);
-tree.root = tree.insert(7155);
-tree.root = tree.insert(7156);
-tree.root = tree.insert(7157);
-
-prettyPrint(tree.root);
-
-console.log(tree.find(67));
-
-// tree.levelOrder((current) => {
-//   if (current.data > 33) {
-//     console.log(current.data + " is big");
-//   } else {
-//     console.log(current.data + " is small");
-//   }
-// });
-// tree.preOrder((current) => {
-//   if (current.data > 33) {
-//     console.log(current.data + " is big");
-//   } else {
-//     console.log(current.data + " is small");
-//   }
-// });
-
-tree.inOrder((current) => {
-  if (current.data > 33) {
-    console.log(current.data + " is big");
-  } else {
-    console.log(current.data + " is small");
-  }
-});
-
-// tree.postOrder((current) => {
-//   if (current.data > 33) {
-//     console.log(current.data + " is big");
-//   } else {
-//     console.log(current.data + " is small");
-//   }
-// });
-
-tree.levelOrder((index = 0) => {
-  index++;
-});
-console.log(tree.height(tree.find(5)));
-console.log(tree.depth(tree.find(32)));
-console.log(tree.isBalanced());
-tree.reBalance();
-console.log(tree.isBalanced());
-prettyPrint(tree.root);
